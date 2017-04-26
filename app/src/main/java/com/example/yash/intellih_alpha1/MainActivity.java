@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -92,6 +93,12 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("READ", "data received");
                     temperature_textview.setText(intent.getExtras().getString("field1")+"°C");
                     humidity_textview.append("\t"+intent.getStringExtra("field2")+"%");
+                    if (intent.getExtras().getBoolean("pir_theft")){
+                        Toast.makeText(context, "Intruder Detected in Drawing Room", Toast.LENGTH_LONG).show();
+                    }
+                    if (intent.getExtras().getBoolean("pir_out")){
+                        Toast.makeText(context, "User is present in Bed Room", Toast.LENGTH_LONG).show();
+                    }
                 }
             };
             registerReceiver(br,new IntentFilter("ReadData"));
