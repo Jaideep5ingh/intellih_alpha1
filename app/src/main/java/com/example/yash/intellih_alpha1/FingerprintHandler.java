@@ -2,6 +2,7 @@ package com.example.yash.intellih_alpha1;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
@@ -82,6 +83,10 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
             }
         });
         MySingleton.getInstance(appContext).addToQueue(stringRequest);
+
+        Toast.makeText(appContext, "Aloha Mora", Toast.LENGTH_SHORT).show();
+
+        appContext.startActivity(new Intent(appContext, MainActivity.class));
     }
 
 }

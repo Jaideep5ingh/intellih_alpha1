@@ -91,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     Log.d("READ", "data received");
-                    temperature_textview.setText(intent.getExtras().getString("field1")+"°C");
+                    String temp = intent.getStringExtra("field1");
+                    temperature_textview.setText(temp +"°C");
                     humidity_textview.append("\t"+intent.getStringExtra("field2")+"%");
                     if (intent.getExtras().getBoolean("pir_theft")){
                         Toast.makeText(context, "Intruder Detected in Drawing Room", Toast.LENGTH_LONG).show();
@@ -108,6 +109,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (i !=null){
+            stopService(i);
+        }
+        if (br != null){
+            unregisterReceiver(br);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         if (i !=null){
             stopService(i);
         }
