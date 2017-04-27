@@ -3,14 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
+    android:background="@drawable/gradient_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.yash.intellih_alpha1.FingerprintActivity">
 
     <TextView
         android:layout_width="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
         android:layout_height="wrap_content"
-        android:text="Touch Sensor"
+        android:textSize="16sp"
+        android:text="Touch Sensor to unlock your door.\nThe door will lock automatically in 15 seconds."
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="214dp"
@@ -19,7 +23,7 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:srcCompat="?android:attr/fingerprintAuthDrawable"
+        app:srcCompat="@drawable/fingerprint"
         android:id="@+id/imageView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

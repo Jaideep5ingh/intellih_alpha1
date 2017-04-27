@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     Intent i;
 
 
-
     public static final String bed_room_write_key = "H2W6DCHAD4ZC1M4Q";
     public static final String bed_room_channelId = "258519";
 
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         data = new ArrayList<>();
         addData();
-        adapter = new CustomAdapter(getApplicationContext(),data);
+        adapter = new CustomAdapter(getApplicationContext(), data);
         recyclerView.setAdapter(adapter);
 
         unlockDoor.setOnClickListener(new View.OnClickListener() {
@@ -86,33 +85,34 @@ public class MainActivity extends AppCompatActivity {
         i = new Intent(getApplicationContext(), ReadDataService.class);
         startService(i);
 
-        if(br == null){
+
+        if (br == null) {
             br = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     Log.d("READ", "data received");
                     String temp = intent.getStringExtra("field1");
-                    temperature_textview.setText(temp +"°C");
-                    humidity_textview.append("\t"+intent.getStringExtra("field2")+"%");
-                    if (intent.getExtras().getBoolean("pir_theft")){
+                    temperature_textview.setText(temp + "°C");
+                    humidity_textview.append("\t" + intent.getStringExtra("field2") + "%");
+                    if (intent.getExtras().getBoolean("pir_theft")) {
                         Toast.makeText(context, "Intruder Detected in Drawing Room", Toast.LENGTH_LONG).show();
                     }
-                    if (intent.getExtras().getBoolean("pir_out")){
+                    if (intent.getExtras().getBoolean("pir_out")) {
                         Toast.makeText(context, "User is present in Bed Room", Toast.LENGTH_LONG).show();
                     }
                 }
             };
-            registerReceiver(br,new IntentFilter("ReadData"));
+            registerReceiver(br, new IntentFilter("ReadData"));
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (i !=null){
+        if (i != null) {
             stopService(i);
         }
-        if (br != null){
+        if (br != null) {
             unregisterReceiver(br);
         }
     }
@@ -120,10 +120,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (i !=null){
+        if (i != null) {
             stopService(i);
         }
-        if (br != null){
+        if (br != null) {
             unregisterReceiver(br);
         }
     }

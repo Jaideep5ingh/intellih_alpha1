@@ -3,6 +3,7 @@ package com.example.yash.intellih_alpha1;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
@@ -37,7 +38,6 @@ public class ReadDataService extends Service {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("READ", "GOT RESPONSE");
-                        //Toast.makeText(ReadDataService.this, response.toString(), Toast.LENGTH_SHORT).show();
                         if (response == null) {
                             Log.d("READ", "EMPTY RESPONSE");
                         } else {
@@ -73,23 +73,21 @@ public class ReadDataService extends Service {
                     @Override
                     public void onResponse(JSONObject response1) {
                         Log.d("READ", "GOT RESPONSE");
-                        Toast.makeText(ReadDataService.this, response1.toString(), Toast.LENGTH_SHORT).show();
                         if (response1 == null) {
                             Log.d("READ", "EMPTY RESPONSE");
                         } else {
                             try {
                                 pir_theft = response1.getString("field1");
-                                Toast.makeText(ReadDataService.this, pir_theft, Toast.LENGTH_SHORT).show();
                                 pir_out = response1.getString("field2");
                                 pir_in = response1.getString("field3");
                                 Log.d("READ_PIR", "field1 = " + pir_theft);
 
-                                if (pir_theft==("1"))
+                                if (pir_theft.equalsIgnoreCase("1"))
                                     i.putExtra("pir_theft", true);
                                 else
                                     i.putExtra("pir_theft", false);
 
-                                if (pir_out==("1"))
+                                if (pir_out.equalsIgnoreCase("1"))
                                     i.putExtra("pir_out", true);
                                 else
                                     i.putExtra("pir_out", false);

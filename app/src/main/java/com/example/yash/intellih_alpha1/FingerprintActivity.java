@@ -54,14 +54,14 @@ public class FingerprintActivity extends AppCompatActivity {
         if (!fingerprintManager.isHardwareDetected()) {
             textView.setText("Finger Print Hardware not found");
         } else {
-            Toast.makeText(this, "hardware detected", Toast.LENGTH_SHORT).show();
+
             if (ActivityCompat.checkSelfPermission(this,
                     android.Manifest.permission.USE_FINGERPRINT)
                     != PackageManager.PERMISSION_GRANTED) {
                 textView.setText
                         ("Fingerprint Authentication requires permission");
             } else {
-                Toast.makeText(this, "Permissions Granted", Toast.LENGTH_SHORT).show();
+
                 if (!fingerprintManager.hasEnrolledFingerprints()) {
                     textView.setText("You need atleast one fingerprint");
                 } else {
@@ -69,7 +69,7 @@ public class FingerprintActivity extends AppCompatActivity {
                         textView.setText
                                 ("Lock screen not enabled in settings");
                     } else {
-                        Toast.makeText(this, "Key Guard Secured", Toast.LENGTH_SHORT).show();
+
                         generateKey();
 
                         if (cipherInit()) {
@@ -102,10 +102,8 @@ public class FingerprintActivity extends AppCompatActivity {
                                     "AndroidKeyStore");
 
         } catch (NoSuchAlgorithmException e) {
-            Toast.makeText(this, "Error on line 100", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } catch (NoSuchProviderException e) {
-            Toast.makeText(this, "Error on line 103", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -121,7 +119,6 @@ public class FingerprintActivity extends AppCompatActivity {
                             (KeyProperties.ENCRYPTION_PADDING_PKCS7)
                     .build());
             keyGenerator.generateKey();
-            Toast.makeText(this, "Reached 118", Toast.LENGTH_SHORT).show();
 
         } catch (CertificateException |
                 InvalidAlgorithmParameterException e) {

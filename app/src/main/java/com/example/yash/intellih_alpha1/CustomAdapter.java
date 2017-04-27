@@ -80,9 +80,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 }
             }
         });
-
     }
-
     @Override
     public int getItemCount() {
         return dataSet.size();

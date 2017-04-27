@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
@@ -83,10 +84,12 @@ public class DrawingRoomActivity extends AppCompatActivity {
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (current_field1 == "0")
-                            switch_light.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                        else
-                            switch_light.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                        switch(last_field1){
+                            case "1" : switch_light.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+                                break;
+                            case "0" : switch_light.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+                                break;
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -107,10 +110,12 @@ public class DrawingRoomActivity extends AppCompatActivity {
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (current_field2 == "0")
-                            switch_fan.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                        else
-                            switch_fan.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                        switch(last_field2){
+                            case "1" : switch_fan.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+                                break;
+                            case "0" : switch_fan.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+                                break;
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -175,6 +180,18 @@ public class DrawingRoomActivity extends AppCompatActivity {
                                 last_field2 = response.getString("field2");
                                 Log.d("READ", "field1 = " + last_field1);
                                 Log.d("READ", "field1 = " + last_field2);
+                                switch(last_field1){
+                                    case "1" : switch_light.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+                                        break;
+                                    case "0" : switch_light.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+                                        break;
+                                }
+                                switch(last_field2){
+                                    case "1" : switch_fan.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+                                        break;
+                                    case "0" : switch_fan.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+                                        break;
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
